@@ -1,3 +1,4 @@
+import 'package:barbearia_tcc/src/core/restClient/interceptors/auth_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 
@@ -10,6 +11,7 @@ final class RestClient extends DioForNative {
         )) {
     interceptors.addAll([
       LogInterceptor(request: true, responseBody: true),
+      AuthInterceptor(),
     ]);
   }
 
@@ -18,7 +20,7 @@ final class RestClient extends DioForNative {
     return this;
   }
 
-   RestClient get unauth {
+  RestClient get unauth {
     options.extra['DIO_AUTH_KEY'] = false;
     return this;
   }

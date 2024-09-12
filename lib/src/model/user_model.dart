@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 sealed class UserModel {
   final int id;
   final String name;
@@ -11,6 +9,14 @@ sealed class UserModel {
     required this.email,
     this.avatar,
   });
+
+  factory UserModel.fromMap(Map<String, dynamic> json) {
+    return switch (json['profile']) {
+      'ADM' => UserModel.fromMap(json),
+      'EMPLOYEE' => UserModelEmployee.fromMap(json),
+      _ => throw ArgumentError('User profile not found'),
+    };
+  }
 }
 
 class UserModelADM extends UserModel {
