@@ -20,14 +20,14 @@ class BarbershopRepositoryImpl implements BarbershopRepository {
     switch (userModel) {
       case UserModelADM():
         final Response(data: List(first: data)) = await restClient.auth.get(
-          '/barbeshop',
+          '/barbershop',
           queryParameters: {'user_id': '#userAuthRef'},
         );
         return Sucess(BarbershopModel.fromMap(data));
         
       case UserModelEmployee():
         final Response(:data) = await restClient.auth.get(
-          '/barbeshop/${userModel.barbershopId}',
+          '/barbershop/${userModel.barbershopId}',
         );
         return Sucess(BarbershopModel.fromMap(data));
     }

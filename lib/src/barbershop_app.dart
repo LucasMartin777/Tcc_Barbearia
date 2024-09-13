@@ -1,6 +1,7 @@
 import 'package:asyncstate/asyncstate.dart';
 import 'package:barbearia_tcc/src/core/ui/barbershop_theme.dart';
 import 'package:barbearia_tcc/src/core/ui/widgets/barbershop_loader.dart';
+
 import 'package:barbearia_tcc/src/features/auth/login/login_page.dart';
 import 'package:barbearia_tcc/src/features/splash/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -20,9 +21,8 @@ class BarbershopApp extends StatelessWidget {
             routes: {
               '/': (_) => const SplashPage(),
               '/auth/login': (_) => const LoginPage(),
-              // '/home/adm': (_) => const Text('adm'),
-              // '/home/employee': (_) => const Text('employee'),
-
+              '/home/adm': (_) => const Text('ADM'),
+              '/home/employee': (_) => const Text('EMPLOYEE'),
             },
           );
         });

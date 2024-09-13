@@ -1,4 +1,3 @@
-import 'package:barbearia_tcc/src/barbershop_app.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
 import 'package:barbearia_tcc/src/core/restClient/rest_clent.dart';
 import 'package:barbearia_tcc/src/model/barbershop_model.dart';
@@ -33,6 +32,8 @@ Future<UserModel> getMe(GetMeRef ref) async {
 @Riverpod(keepAlive: true)
 BarbershopRepository barbershopRepository(BarbershopRepositoryRef ref) =>
     BarbershopRepositoryImpl(restClient: ref.watch(restClientProvider));
+
+    
 @Riverpod(keepAlive: true)
 Future<BarbershopModel> getMyBarbershop(GetMyBarbershopRef ref) async {
   final userModel = await ref.watch(getMeProvider.future);

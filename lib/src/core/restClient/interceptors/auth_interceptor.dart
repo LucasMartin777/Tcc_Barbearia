@@ -7,6 +7,8 @@ class AuthInterceptor extends Interceptor {
   Future<void> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     final RequestOptions(:headers, :extra) = options;
+
+    
     const authHeaderKey = 'Authorization';
     headers.remove(authHeaderKey);
 
