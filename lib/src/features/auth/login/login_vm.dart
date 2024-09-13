@@ -12,9 +12,10 @@ part 'login_vm.g.dart';
 class LoginVm extends _$LoginVm {
   @override
   LoginState build() => LoginState.initial();
-  final loaderHandler = AsyncLoaderHandler()..start();
 
   Future<void> login(String email, String password) async {
+    final loaderHandler = AsyncLoaderHandler()..start();
+
     final loginService = ref.watch(userLoginServiceProvider);
 
     final result = await loginService.execute(email, password);
