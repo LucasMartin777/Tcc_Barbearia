@@ -17,7 +17,7 @@ sealed class Messages {
     );
   }
 
-  static void showSucess(String message, BuildContext context) {
+  static void showSuccess(String message, BuildContext context) {
     showTopSnackBar(
       Overlay.of(context),
       CustomSnackBar.success(message: message),

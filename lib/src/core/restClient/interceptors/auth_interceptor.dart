@@ -16,6 +16,7 @@ class AuthInterceptor extends Interceptor {
       final sp = await SharedPreferences.getInstance();
       headers.addAll({
         authHeaderKey: 'Bearer ${sp.getString(LocalStorageKeys.accessToken)}'
+        
       });
     }
 

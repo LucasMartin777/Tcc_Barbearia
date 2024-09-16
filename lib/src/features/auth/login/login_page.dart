@@ -28,7 +28,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final LoginVm(:login) = ref.watch(loginVmProvider.notifier);
+    final LoginVm(: login) = ref.watch(loginVmProvider.notifier);
 
     ref.listen(loginVmProvider, (_, state) {
       switch (state) {

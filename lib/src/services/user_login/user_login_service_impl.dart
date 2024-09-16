@@ -10,19 +10,20 @@ import './user_login_service.dart';
 
 class UserLoginServiceImpl implements UserLoginService {
   final UserRepository userRepository;
+
   UserLoginServiceImpl({
     required this.userRepository,
   });
   @override
   Future<Either<ServiceException, Nil>> execute(
       String email, String password) async {
-    final loginREsult = await userRepository.login(email, password);
+    final loginResult = await userRepository.login(email, password);
 
-    switch (loginREsult) {
-      case Sucess(value: final accessToken):
+    switch (loginResult) {
+      case Success(value: final accessToken):
         final sp = await SharedPreferences.getInstance();
         sp.setString(LocalStorageKeys.accessToken, accessToken);
-        return Sucess(nil);
+        return Success(nil);
       case Failure(:final exception):
         return switch (exception) {
           AuthError() =>

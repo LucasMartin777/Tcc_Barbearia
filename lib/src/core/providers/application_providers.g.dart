@@ -50,7 +50,7 @@ final userLoginServiceProvider = Provider<UserLoginService>.internal(
 );
 
 typedef UserLoginServiceRef = ProviderRef<UserLoginService>;
-String _$getMeHash() => r'6e261722853acda09b757d81b2228cd7699f525c';
+String _$getMeHash() => r'835de91f459d1216fe7813de1ce4ffa8c28975d4';
 
 /// See also [getMe].
 @ProviderFor(getMe)
@@ -80,7 +80,7 @@ final barbershopRepositoryProvider = Provider<BarbershopRepository>.internal(
 );
 
 typedef BarbershopRepositoryRef = ProviderRef<BarbershopRepository>;
-String _$getMyBarbershopHash() => r'd13a643ee8061a69b6e3de2d54e01611527001a6';
+String _$getMyBarbershopHash() => r'e1c72495b6a8e9b1b3af23c7ef1c9144fb45e841';
 
 /// See also [getMyBarbershop].
 @ProviderFor(getMyBarbershop)

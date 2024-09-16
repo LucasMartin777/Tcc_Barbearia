@@ -1,5 +1,5 @@
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
-import 'package:barbearia_tcc/src/core/restClient/rest_clent.dart';
+import 'package:barbearia_tcc/src/core/restClient/rest_client.dart';
 import 'package:barbearia_tcc/src/model/barbershop_model.dart';
 import 'package:barbearia_tcc/src/model/user_model.dart';
 import 'package:barbearia_tcc/src/repositories/barbershop/barbershop_repository.dart';
@@ -24,7 +24,7 @@ Future<UserModel> getMe(GetMeRef ref) async {
   final result = await ref.watch(userRepositoryProvider).me();
 
   return switch (result) {
-    Sucess(value: final userModel) => userModel,
+    Success(value: final userModel) => userModel,
     Failure(:final exception) => throw exception,
   };
 }
@@ -40,7 +40,7 @@ Future<BarbershopModel> getMyBarbershop(GetMyBarbershopRef ref) async {
   final barbershopRepository = ref.watch(barbershopRepositoryProvider);
   final result = await barbershopRepository.getMyBarbershop(userModel);
   return switch (result) {
-    Sucess(value: final barbershop) => barbershop,
+    Success(value: final barbershop) => barbershop,
     Failure(:final exception) => throw exception
   };
 }

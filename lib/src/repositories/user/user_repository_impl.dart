@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:barbearia_tcc/src/core/exceptions/auth_exception.dart';
 import 'package:barbearia_tcc/src/core/exceptions/repository_exception.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
-import 'package:barbearia_tcc/src/core/restClient/rest_clent.dart';
+import 'package:barbearia_tcc/src/core/restClient/rest_client.dart';
 import 'package:barbearia_tcc/src/model/user_model.dart';
 import 'package:dio/dio.dart';
 
@@ -26,7 +26,7 @@ class UserRepositoryImpl implements UserRepository {
         'password': password,
       });
 
-      return Sucess(data['access_token']);
+      return Success(data['access_token']);
     } on DioException catch (e, s) {
       if (e.response != null) {
         final Response(:statusCode) = e.response!;
@@ -45,7 +45,7 @@ class UserRepositoryImpl implements UserRepository {
     try {
       final Response(:data) = await restClient.auth.get('/me');
 
-      return Sucess(UserModel.fromMap(data));
+      return Success(UserModel.fromMap(data));
     } on Exception catch (e, s) {
       log('Erro ao buscar usuário logado', error: e, stackTrace: s);
       return Failure(

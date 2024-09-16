@@ -21,7 +21,7 @@ class LoginVm extends _$LoginVm {
     final result = await loginService.execute(email, password);
 
     switch (result) {
-      case Sucess():
+      case Success():
         ref.invalidate(getMeProvider);
         ref.invalidate(getMyBarbershopProvider);
 
