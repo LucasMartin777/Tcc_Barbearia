@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:barbearia_tcc/src/core/exceptions/auth_exception.dart';
 import 'package:barbearia_tcc/src/core/exceptions/repository_exception.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
+import 'package:barbearia_tcc/src/core/fp_funcional_program/nil.dart';
 import 'package:barbearia_tcc/src/core/restClient/rest_client.dart';
 import 'package:barbearia_tcc/src/model/user_model.dart';
 import 'package:dio/dio.dart';
@@ -53,6 +54,24 @@ class UserRepositoryImpl implements UserRepository {
     } on ArgumentError catch (e, s) {
       log('Invalid Json', error: e, stackTrace: s);
       return Failure(RepositoryException(message: e.message));
+    }
+  }
+
+  @override
+  Future<Either<RepositoryException, Nil>> registerAdmin(
+      ({String email, String name, String password}) userData) async {
+    try {
+      await restClient.unauth.post('/users', data: {
+        'name': userData.name,
+        'email': userData.email,
+        'password': userData.password,
+        'profile': 'ADM',
+      });
+      return Success(nil);
+    } on Exception catch (e, s) {
+      log('Erro ao registrar usuário admin', error: e, stackTrace: s);
+      return Failure(
+          RepositoryException(message: 'Erro ao registrar usuário admin'));
     }
   }
 }
