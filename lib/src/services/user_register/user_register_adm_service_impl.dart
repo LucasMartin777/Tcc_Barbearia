@@ -4,13 +4,13 @@ import 'package:barbearia_tcc/src/core/fp_funcional_program/nil.dart';
 import 'package:barbearia_tcc/src/repositories/user/user_repository.dart';
 import 'package:barbearia_tcc/src/services/user_login/user_login_service.dart';
 
-import './user_register_service.dart';
+import 'user_register_adm__service.dart';
 
-class UserRegisterServiceImpl implements UserRegisterService {
+class UserRegisterAdmServiceImpl implements UserRegisterAdmService {
   final UserRepository userRepository;
   final UserLoginService userLoginService;
 
-  UserRegisterServiceImpl({
+  UserRegisterAdmServiceImpl({
     required this.userRepository,
     required this.userLoginService,
   });

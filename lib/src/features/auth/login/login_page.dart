@@ -28,7 +28,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final LoginVm(: login) = ref.watch(loginVmProvider.notifier);
+    final LoginVm(:login) = ref.watch(loginVmProvider.notifier);
 
     ref.listen(loginVmProvider, (_, state) {
       switch (state) {
@@ -150,7 +150,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         alignment: Alignment.bottomCenter,
                         child: InkWell(
                           onTap: () {
-                            Navigator.of(context).pushNamed('/auth//register/user');
+                            Navigator.of(context)
+                                .pushNamed('/auth/register/user');
                           },
                           child: const Text(
                             'Criar Conta',
