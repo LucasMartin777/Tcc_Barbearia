@@ -1,7 +1,7 @@
 import 'package:asyncstate/asyncstate.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
 import 'package:barbearia_tcc/src/core/providers/application_providers.dart';
-import 'package:barbearia_tcc/src/features/auth/register/user_register_providers.dart';
+import 'package:barbearia_tcc/src/features/auth/register/user/user_register_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'user_register_vm.g.dart';
@@ -30,8 +30,7 @@ class UserRegisterVm extends _$UserRegisterVm {
       password: password,
     );
 
-    final registerResult =
-        await userRegisterAdmService.execute(userData).asyncLoader();
+    final registerResult = await userRegisterAdmService.execute(userData);
     switch (registerResult) {
       case Success():
         ref.invalidate(getMeProvider);

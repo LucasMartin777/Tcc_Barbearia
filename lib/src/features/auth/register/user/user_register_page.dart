@@ -1,6 +1,6 @@
 import 'package:barbearia_tcc/src/core/ui/helpers/form_helper.dart';
 import 'package:barbearia_tcc/src/core/ui/helpers/messages.dart';
-import 'package:barbearia_tcc/src/features/auth/register/user_register_vm.dart';
+import 'package:barbearia_tcc/src/features/auth/register/user/user_register_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:validatorless/validatorless.dart';
@@ -35,7 +35,7 @@ class _UserRegisterPageState extends ConsumerState<UserRegisterPage> {
         case UserRegisterStateStatus.initial:
           break;
         case UserRegisterStateStatus.success:
-          Navigator.of(context).pushNamed('/auth/login');
+          Navigator.of(context).pushNamed('/auth/register/barbershop');
         case UserRegisterStateStatus.error:
           Messages.showError(
             'Erro ao registrar usuário administrador',

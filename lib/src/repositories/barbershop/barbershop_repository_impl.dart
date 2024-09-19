@@ -17,6 +17,7 @@ class BarbershopRepositoryImpl implements BarbershopRepository {
   @override
   Future<Either<RepositoryException, BarbershopModel>> getMyBarbershop(
       UserModel userModel) async {
+        
     switch (userModel) {
       case UserModelADM():
         final Response(data: List(first: data)) = await restClient.auth.get(
