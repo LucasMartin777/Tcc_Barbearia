@@ -1,4 +1,3 @@
-import 'package:asyncstate/asyncstate.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
 import 'package:barbearia_tcc/src/core/providers/application_providers.dart';
 import 'package:barbearia_tcc/src/features/auth/register/user/user_register_providers.dart';
