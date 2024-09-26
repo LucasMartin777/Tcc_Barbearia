@@ -1,3 +1,4 @@
+import 'package:barbearia_tcc/src/core/ui/widgets/hours_panel.dart';
 import 'package:barbearia_tcc/src/core/ui/widgets/weekdays_panel.dart';
 import 'package:flutter/material.dart';
 
@@ -11,12 +12,12 @@ class BarbershopRegisterPage extends StatelessWidget {
         title: const Text('Cadastrar estabelecimento'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox(
-                height: 19,
+                height: 5,
               ),
               TextFormField(
                 decoration: const InputDecoration(
@@ -38,9 +39,9 @@ class BarbershopRegisterPage extends StatelessWidget {
               const SizedBox(
                 height: 24,
               ),
-              const SizedBox(
-                height: 178,
-                child: Placeholder(),
+              const HoursPanel(
+                starTime: 6,
+                endTime: 23,
               ),
               const SizedBox(
                 height: 24,
