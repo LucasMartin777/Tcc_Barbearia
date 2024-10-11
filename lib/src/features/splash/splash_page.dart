@@ -50,7 +50,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
                 .pushNamedAndRemoveUntil('/home/employee', (route) => false);
           case _:
             Navigator.of(context)
-                .pushNamedAndRemoveUntil('/home/login', (route) => false);
+                .pushNamedAndRemoveUntil('/auth/login', (route) => false);
         }
       });
     });

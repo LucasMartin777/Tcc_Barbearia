@@ -1,5 +1,6 @@
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
 import 'package:barbearia_tcc/src/core/restClient/rest_client.dart';
+import 'package:barbearia_tcc/src/core/ui/barbershop_nav_global_key.dart';
 import 'package:barbearia_tcc/src/model/barbershop_model.dart';
 import 'package:barbearia_tcc/src/model/user_model.dart';
 import 'package:barbearia_tcc/src/repositories/barbershop/barbershop_repository.dart';
@@ -8,7 +9,9 @@ import 'package:barbearia_tcc/src/repositories/user/user_repository.dart';
 import 'package:barbearia_tcc/src/repositories/user/user_repository_impl.dart';
 import 'package:barbearia_tcc/src/services/user_login/user_login_service.dart';
 import 'package:barbearia_tcc/src/services/user_login/user_login_service_impl.dart';
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 part 'application_providers.g.dart';
 
 @Riverpod(keepAlive: true)
@@ -33,7 +36,6 @@ Future<UserModel> getMe(GetMeRef ref) async {
 BarbershopRepository barbershopRepository(BarbershopRepositoryRef ref) =>
     BarbershopRepositoryImpl(restClient: ref.watch(restClientProvider));
 
-    
 @Riverpod(keepAlive: true)
 Future<BarbershopModel> getMyBarbershop(GetMyBarbershopRef ref) async {
   final userModel = await ref.watch(getMeProvider.future);
@@ -43,4 +45,16 @@ Future<BarbershopModel> getMyBarbershop(GetMyBarbershopRef ref) async {
     Success(value: final barbershop) => barbershop,
     Failure(:final exception) => throw exception
   };
+}
+
+@riverpod
+Future<void> logout(LogoutRef ref) async {
+  final sp = await SharedPreferences.getInstance();
+  sp.clear();
+
+  Navigator.of(BarbershopNavGlobalKey.instance.navKey.currentContext!)
+      .pushNamedAndRemoveUntil('/auth/login', (route) => false);
+  await Future.delayed(const Duration(milliseconds: 500));
+  ref.invalidate(getMeProvider);
+  ref.invalidate(getMyBarbershopProvider);
 }

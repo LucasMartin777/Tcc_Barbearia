@@ -274,6 +274,16 @@
             "email": "testefinal@gmail.com",
             "password": "741852",
             "profile": "ADM"
+        },
+        {
+            "id": 43,
+            "email": "rodrigorahman1@gmail.com",
+            "password": "123123"
+        },
+        {
+            "id": 44,
+            "email": "rodrigorahman1@gmail.com",
+            "password": "123123"
         }
     ],
     "adm_users": [],

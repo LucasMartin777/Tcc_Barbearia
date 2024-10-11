@@ -1,10 +1,11 @@
 import 'package:barbearia_tcc/src/core/ui/barbershop_icons.dart';
 import 'package:barbearia_tcc/src/core/ui/constants.dart';
+import 'package:barbearia_tcc/src/model/user_model.dart';
 import 'package:flutter/material.dart';
 
 class HomeEmployeeTitle extends StatelessWidget {
-  final imageNetwork = false;
-  const HomeEmployeeTitle({super.key});
+  final UserModel employee;
+  const HomeEmployeeTitle({super.key, required this.employee});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +25,9 @@ class HomeEmployeeTitle extends StatelessWidget {
             height: 56,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: switch (imageNetwork) {
-                  true => const NetworkImage('url'),
-                  false => const AssetImage(ImageConstants.avatar)
+                image: switch (employee.avatar) {
+                  final avatar? => NetworkImage(avatar),
+                  _ => const AssetImage(ImageConstants.avatar)
                 } as ImageProvider,
               ),
             ),
@@ -39,9 +40,9 @@ class HomeEmployeeTitle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Nome e Sobrenome',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                Text(
+                  employee.name,
+                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
