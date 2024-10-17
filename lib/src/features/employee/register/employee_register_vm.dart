@@ -6,6 +6,7 @@ part 'employee_register_vm.g.dart';
 
 @riverpod
 class EmployeeRegisterVm extends _$EmployeeRegisterVm {
+  @override
   EmployeeRegisterState build() => EmployeeRegisterState.initial();
 
   void setRegisterADM(bool isRegisterADM) {
@@ -14,11 +15,12 @@ class EmployeeRegisterVm extends _$EmployeeRegisterVm {
 
   void addOrREmoveWorkdays(String weekDay) {
     final EmployeeRegisterState(:workdays) = state;
-    if(workdays.contains(weekDay)){
+    if (workdays.contains(weekDay)) {
       workdays.remove(weekDay);
-    }else{
+    } else {
       workdays.add(weekDay);
     }
   }
+
   void addOrREmoveWorkhours(int hour) {}
 }
