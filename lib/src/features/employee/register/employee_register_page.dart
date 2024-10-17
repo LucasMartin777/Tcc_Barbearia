@@ -1,8 +1,17 @@
 import 'package:barbearia_tcc/src/core/ui/widgets/avatar_widget.dart';
+import 'package:barbearia_tcc/src/core/ui/widgets/hours_panel.dart';
+import 'package:barbearia_tcc/src/core/ui/widgets/weekdays_panel.dart';
 import 'package:flutter/material.dart';
 
-class EmployeeRegisterPage extends StatelessWidget {
+class EmployeeRegisterPage extends StatefulWidget {
   const EmployeeRegisterPage({super.key});
+
+  @override
+  State<EmployeeRegisterPage> createState() => _EmployeeRegisterPageState();
+}
+
+class _EmployeeRegisterPageState extends State<EmployeeRegisterPage> {
+  var registerAdm = false;
 
   @override
   Widget build(BuildContext context) {
@@ -11,30 +20,87 @@ class EmployeeRegisterPage extends StatelessWidget {
         title: const Text('Cadastrar Colaborador'),
       ),
       body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              const AvatarWidget(),
-              const SizedBox(
-                height: 32,
-              ),
-              Row(
-                children: [
-                  Checkbox.adaptive(value: false, onChanged: (value) {}),
-                  const Expanded(
-                    child: Text(
-                      'Sou administrador e quero me cadastrar como colaborador',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                  )
-                ],
-              ),
-              Column(
-                children: [
-                  TextFormField(),
-                ],
-              ),
-            ],
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Center(
+            child: Column(
+              children: [
+                const AvatarWidget(),
+                const SizedBox(
+                  height: 32,
+                ),
+                Row(
+                  children: [
+                    Checkbox.adaptive(
+                        value: registerAdm,
+                        onChanged: (value) {
+                          setState(() {
+                            registerAdm = !registerAdm;
+                          });
+                        }),
+                    const Expanded(
+                      child: Text(
+                        'Sou administrador e quero me cadastrar como colaborador',
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Offstage(
+                  offstage: registerAdm,
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(label: Text('Nome')),
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      TextFormField(
+                        decoration:
+                            const InputDecoration(label: Text('E-mail')),
+                      ),
+                      const SizedBox(
+                        height: 24,
+                      ),
+                      TextFormField(
+                        decoration: const InputDecoration(label: Text('Senha')),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                WeekdaysPanel(
+                  enableDays: const ['Seg'],
+                  onDayPressed: (String day) {},
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                HoursPanel(
+                  starTime: 6,
+                  endTime: 23,
+                  onHourPressed: (int hour) {},
+                  enableTimes: const [6,7,8,9],
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(56)),
+                  onPressed: () {},
+                  child: const Text('Cadastrar colaborador'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
