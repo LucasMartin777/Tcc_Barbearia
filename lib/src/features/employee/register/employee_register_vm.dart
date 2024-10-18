@@ -1,6 +1,10 @@
 import 'package:asyncstate/asyncstate.dart';
+import 'package:barbearia_tcc/src/core/exceptions/repository_exception.dart';
+import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
+import 'package:barbearia_tcc/src/core/fp_funcional_program/nil.dart';
 import 'package:barbearia_tcc/src/core/providers/application_providers.dart';
 import 'package:barbearia_tcc/src/features/employee/register/employee_register_state.dart';
+import 'package:barbearia_tcc/src/model/barbershop_model.dart';
 import 'package:barbearia_tcc/src/repositories/user/user_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -35,13 +39,41 @@ class EmployeeRegisterVm extends _$EmployeeRegisterVm {
     state = state.copyWith(worhours: worhours);
   }
 
+  Future<void> register({String? name, String? email, String? password}) async {
+    final EmployeeRegisterState(:registerADM, :workdays, :worhours) = state;
+    final asyncLoaderHandler = AsyncLoaderHandler()..start();
 
-  // Future<void> register({String? name, String? email,String? password}){
+    final UserRepository(:registerAdminasEmployee, :registerEmployee) =
+        ref.read(userRepositoryProvider);
 
-  //   final EmployeeRegisterState(:registerADM,:workdays,:worhours) = state;
-  //   final asyncLoaderHandler = AsyncLoaderHandler()..start();
+    final Either<RepositoryException, Nil> resultRegister;
 
-  //   final UserRepository() = ref.read;
+    if (registerADM) {
+      final dto = (
+        workdays: workdays,
+        workHours: worhours,
+      );
+      resultRegister = await registerAdminasEmployee(dto);
+    } else {
+      final BarbershopModel(:id) =
+          await ref.watch(getMyBarbershopProvider.future);
+      final dto = (
+        barbershopId: id,
+        name: name!,
+        email: email!,
+        password: password!,
+        workdays: workdays,
+        workHours: worhours,
+      );
+      resultRegister = await registerEmployee(dto);
+    }
 
-  // }
+    switch (resultRegister) {
+      case Success():
+        state = state.copyWith(status: EmployeeRegisterStateStatus.sucess);
+      case Failure():
+        state = state.copyWith(status: EmployeeRegisterStateStatus.error);
+    }
+    asyncLoaderHandler.close();
+  }
 }
