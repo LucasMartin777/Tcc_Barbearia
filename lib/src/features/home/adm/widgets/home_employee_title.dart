@@ -42,7 +42,8 @@ class HomeEmployeeTitle extends StatelessWidget {
               children: [
                 Text(
                   employee.name,
-                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w500),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -51,7 +52,9 @@ class HomeEmployeeTitle extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/schedule');
+                      },
                       child: const Text('AGENDAR'),
                     ),
                     OutlinedButton(

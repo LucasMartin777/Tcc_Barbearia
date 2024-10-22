@@ -7,6 +7,7 @@ import 'package:barbearia_tcc/src/features/auth/register/barbershop/barbershop_r
 import 'package:barbearia_tcc/src/features/auth/register/user/user_register_page.dart';
 import 'package:barbearia_tcc/src/features/employee/register/employee_register_page.dart';
 import 'package:barbearia_tcc/src/features/home/adm/widgets/home_adm_page.dart';
+import 'package:barbearia_tcc/src/features/schedules/schedule_page.dart';
 import 'package:barbearia_tcc/src/features/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +33,7 @@ class BarbershopApp extends StatelessWidget {
               '/home/adm': (_) => const HomeAdmPage(),
               '/home/employee': (_) => const Text('EMPLOYEE'),
               '/employee/register': (_) => const EmployeeRegisterPage(),
+              '/schedule': (_) => const SchedulePage(),
             },
           );
         });
