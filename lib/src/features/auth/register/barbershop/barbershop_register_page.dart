@@ -36,11 +36,11 @@ class _BarbershopRegisterPageState
 
     ref.listen(barbershopRegisterVmProvider, (_, state) {
       switch (state.status) {
-        case BarbershopRegisterStateStatus.inital:
+        case BarbershopRegisterStateStatus.initial:
           break;
         case BarbershopRegisterStateStatus.error:
           Messages.showError(
-              'Desculpe ocorreu um erro ao registrar baebearia', context);
+              'Desculpe ocorreu um erro ao registrar barbearia', context);
         case BarbershopRegisterStateStatus.success:
           Navigator.of(context)
               .pushNamedAndRemoveUntil('/home/adm', (route) => false);
@@ -49,74 +49,69 @@ class _BarbershopRegisterPageState
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cadastrar estabelecimento'),
+        title: const Text('Cradastrar estabelecimento'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           child: Form(
             key: formKey,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 5,
+            child: Column(children: [
+              const SizedBox(
+                height: 5,
+              ),
+              TextFormField(
+                onTapOutside: (_) => context.unfocus(),
+                controller: nameEC,
+                validator: Validatorless.required('Nome obrigatório'),
+                decoration: const InputDecoration(
+                  label: Text('Nome'),
                 ),
-                TextFormField(
-                  controller: nameEC,
-                  validator: Validatorless.required('Nome obrigatório'),
-                  onTapOutside: (_) => context.unfocus(),
-                  decoration: const InputDecoration(
-                    label: Text('Nome'),
-                  ),
+              ),
+              const SizedBox(height: 22),
+              TextFormField(
+                onTapOutside: (_) => context.unfocus(),
+                controller: emailEC,
+                validator: Validatorless.multiple([
+                  Validatorless.required('E-mail obrigatório'),
+                  Validatorless.email('E-mail obrigatório')
+                ]),
+                decoration: const InputDecoration(
+                  label: Text('E-mail'),
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
-                TextFormField(
-                  controller: emailEC,
-                  validator: Validatorless.multiple([
-                    Validatorless.required('Email obrigatório'),
-                    Validatorless.email('Email inválido'),
-                  ]),
-                  onTapOutside: (_) => context.unfocus(),
-                  decoration: const InputDecoration(
-                    label: Text('E-mail'),
-                  ),
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                WeekdaysPanel(onDayPressed: (value) {
+              ),
+              const SizedBox(height: 24),
+              WeekdaysPanel(
+                onDayPressed: (String value) {
                   barbershopRegisterVM.addOrRemoveOpenDay(value);
-                }),
-                const SizedBox(
-                  height: 24,
-                ),
-                HoursPanel(
-                  starTime: 6,
-                  endTime: 23,
-                  onHourPressed: (int value) {
-                    barbershopRegisterVM.addOrRemoveOpenHour(value);
-                  },
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        minimumSize: const Size.fromHeight(56)),
-                    onPressed: () {
-                      switch (formKey.currentState?.validate()) {
-                        case false || null:
-                          Messages.showError('Formulario inválido', context);
-                        case true:
-                          barbershopRegisterVM.register(
-                              nameEC.text, emailEC.text);
-                      }
-                    },
-                    child: const Text('CADASTRAR ESTABELECIMENTO'))
-              ],
-            ),
+                },
+              ),
+              const SizedBox(height: 24),
+              HoursPanel(
+                starTime: 6,
+                endTime: 23,
+                onHourPressed: (int value) {
+                  barbershopRegisterVM.addOrRemoveOpenHour(value);
+                },
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(56)),
+                onPressed: () {
+                  switch (formKey.currentState?.validate()) {
+                    case null || false:
+                      Messages.showError('Formulário invalido', context);
+                    case true:
+                      barbershopRegisterVM.register(
+                        name: nameEC.text,
+                        email: emailEC.text,
+                      );
+                  }
+                },
+                child: const Text('CADASTRAR ESTABELECIMENTO'),
+              )
+            ]),
           ),
         ),
       ),

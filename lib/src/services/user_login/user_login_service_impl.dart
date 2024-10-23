@@ -9,15 +9,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import './user_login_service.dart';
 
 class UserLoginServiceImpl implements UserLoginService {
-  final UserRepository userRepository;
+  final UserRepository _userRepository;
 
-  UserLoginServiceImpl({
-    required this.userRepository,
-  });
+  UserLoginServiceImpl({required UserRepository userRepository})
+      : _userRepository = userRepository;
+
   @override
   Future<Either<ServiceException, Nil>> execute(
       String email, String password) async {
-    final loginResult = await userRepository.login(email, password);
+    final loginResult = await _userRepository.login(email, password);
 
     switch (loginResult) {
       case Success(value: final accessToken):
@@ -27,9 +27,9 @@ class UserLoginServiceImpl implements UserLoginService {
       case Failure(:final exception):
         return switch (exception) {
           AuthError() =>
-            Failure(ServiceException(message: 'Erro ao realizar login')),
+            Failure(ServiceException(message: 'Erorr ao realizar login')),
           AuthUnauthorizedException() =>
-            Failure(ServiceException(message: 'Login ou senha inválidos')),
+            Failure(ServiceException(message: 'Login ou Senha Inválidos')),
         };
     }
   }

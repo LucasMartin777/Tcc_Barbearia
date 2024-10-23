@@ -5,6 +5,9 @@ import 'package:barbearia_tcc/src/model/barbershop_model.dart';
 import 'package:barbearia_tcc/src/model/user_model.dart';
 
 abstract interface class BarbershopRepository {
+  Future<Either<RepositoryException, BarbershopModel>> getMyBarbershop(
+      UserModel userModel);
+
   Future<Either<RepositoryException, Nil>> save(
       ({
         String name,
@@ -12,6 +15,4 @@ abstract interface class BarbershopRepository {
         List<String> openingDays,
         List<int> openingHours,
       }) data);
-  Future<Either<RepositoryException, BarbershopModel>> getMyBarbershop(
-      UserModel userModel);
 }

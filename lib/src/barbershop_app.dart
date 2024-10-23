@@ -17,24 +17,26 @@ class BarbershopApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AsyncStateBuilder(
-        customLoader: const BarbershopLoader(),
-        builder: (asyncNavigatorObserver) {
-          return MaterialApp(
-            theme: BarbershopTheme.themeData,
-            title: 'Barbearia',
-            navigatorObservers: [asyncNavigatorObserver],
-            navigatorKey: BarbershopNavGlobalKey.instance.navKey,
-            routes: {
-              '/': (_) => const SplashPage(),
-              '/auth/login': (_) => const LoginPage(),
-              '/auth/register/user': (_) => const UserRegisterPage(),
-              '/auth/register/barbershop': (_) =>
-                  const BarbershopRegisterPage(),
-              '/home/adm': (_) => const HomeAdmPage(),
-              '/home/employee': (_) => const Text('EMPLOYEE'),
-              '/employee/register': (_) => const EmployeeRegisterPage(),
-              '/schedule': (_) => const SchedulePage(),
-            },
+      customLoader: const BarbershopLoader(),
+      builder: (asyncNavigatorObserver) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'DW Barbershop',
+          theme: BarbershopTheme.themeData,
+          navigatorObservers: [asyncNavigatorObserver],
+          navigatorKey: BarbershopNavGlobalKey.instance.navKey,
+          routes: {
+            '/': (_) => const SplashPage(),
+            '/auth/login': (_) => const LoginPage(),
+            '/auth/register/user': (_) => const UserRegisterPage(),
+            '/auth/register/barebershop': (_) => const BarbershopRegisterPage(),
+            '/home/adm': (_) => const HomeAdmPage(),
+         //   '/home/employee': (_) => const HomeEmployeePage(),
+            '/employee/register': (_) => const EmployeeRegisterPage(),
+          //  '/employee/schedule': (_) => const EmployeeSchedulePage(),
+            '/schedule': (_) => const SchedulePage(),
+          },
+
           );
         });
   }

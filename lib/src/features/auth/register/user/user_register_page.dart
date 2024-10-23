@@ -14,33 +14,31 @@ class UserRegisterPage extends ConsumerStatefulWidget {
 
 class _UserRegisterPageState extends ConsumerState<UserRegisterPage> {
   final formKey = GlobalKey<FormState>();
-  final nameEc = TextEditingController();
-  final emailEc = TextEditingController();
-  final passwordEc = TextEditingController();
+  final nameEC = TextEditingController();
+  final emailEC = TextEditingController();
+  final passwordEC = TextEditingController();
 
   @override
   void dispose() {
-    nameEc.dispose();
-    emailEc.dispose();
-    passwordEc.dispose();
+    nameEC.dispose();
+    emailEC.dispose();
+    passwordEC.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final userRegisterVm = ref.watch(userRegisterVmProvider.notifier);
+    final userRegisterVM = ref.watch(userRegisterVmProvider.notifier);
 
     ref.listen(userRegisterVmProvider, (_, state) {
       switch (state) {
         case UserRegisterStateStatus.initial:
           break;
         case UserRegisterStateStatus.success:
-          Navigator.of(context).pushNamed('/auth/register/barbershop');
+          Navigator.of(context).pushNamed('/auth/register/barebershop');
         case UserRegisterStateStatus.error:
           Messages.showError(
-            'Erro ao registrar usuário administrador',
-            context,
-          );
+              'Error ao registrar usuário adminstrador',context);
       }
     });
 
@@ -51,78 +49,76 @@ class _UserRegisterPageState extends ConsumerState<UserRegisterPage> {
       body: Padding(
         padding: const EdgeInsets.all(30.0),
         child: SingleChildScrollView(
-            child: Form(
-          key: formKey,
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
+          child: Form(
+            key: formKey,
+            child: Column(children: [
+              const SizedBox(height: 20),
               TextFormField(
                 onTapOutside: (_) => context.unfocus(),
-                controller: nameEc,
+                controller: nameEC,
                 validator: Validatorless.required('Nome obrigatório'),
-                decoration: const InputDecoration(label: Text('nome')),
+                decoration: const InputDecoration(
+                  label: Text('Nome'),
+                ),
               ),
-              const SizedBox(
-                height: 24,
-              ),
+              const SizedBox(height: 24),
               TextFormField(
                 onTapOutside: (_) => context.unfocus(),
-                controller: emailEc,
+                controller: emailEC,
                 validator: Validatorless.multiple([
                   Validatorless.required('E-mail obrigatório'),
-                  Validatorless.email('E-mail inválido'),
+                  Validatorless.email('E-mail obrigatório')
                 ]),
-                decoration: const InputDecoration(label: Text('E-mail')),
+                decoration: const InputDecoration(
+                  label: Text('E-mail'),
+                ),
               ),
-              const SizedBox(
-                height: 24,
-              ),
+              const SizedBox(height: 24),
               TextFormField(
                 onTapOutside: (_) => context.unfocus(),
-                controller: passwordEc,
+                controller: passwordEC,
                 validator: Validatorless.multiple([
-                  Validatorless.required('Senha obrigatória'),
-                  Validatorless.min(6, 'Senha deve ter no minimo 6 caracteres')
+                  Validatorless.required('Senha Obrigatório'),
+                  Validatorless.min(6, 'Senha deve ter no minimo 6 caracteres'),
                 ]),
                 obscureText: true,
-                decoration: const InputDecoration(label: Text('Senha')),
+                decoration: const InputDecoration(
+                  label: Text('Senha'),
+                ),
               ),
-              const SizedBox(
-                height: 24,
-              ),
+              const SizedBox(height: 24),
               TextFormField(
                 onTapOutside: (_) => context.unfocus(),
                 validator: Validatorless.multiple([
-                  Validatorless.required('Senha obrigatória'),
-                  Validatorless.compare(passwordEc, 'Senha diferente ')
+                  Validatorless.required('Confirma Senha Obrigatório'),
+                  Validatorless.compare(
+                      passwordEC, 'Senha diferente de confirma senha'),
                 ]),
                 obscureText: true,
-                decoration:
-                    const InputDecoration(label: Text('Confirmar Senha')),
+                decoration: const InputDecoration(
+                  label: Text('Confirmar Senha'),
+                ),
               ),
-              const SizedBox(
-                height: 24,
-              ),
+              const SizedBox(height: 24),
               ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(56)),
-                  onPressed: () {
-                    switch (formKey.currentState?.validate()) {
-                      case null || false:
-                        Messages.showError('Formulário inválido', context);
-                      case true:
-                        userRegisterVm.register(
-                            name: nameEc.text,
-                            email: emailEc.text,
-                            password: passwordEc.text);
-                    }
-                  },
-                  child: const Text('CRIAR CONTA'))
-            ],
+                style: ElevatedButton.styleFrom(
+                    minimumSize: const Size.fromHeight(56)),
+                onPressed: () {
+                  switch (formKey.currentState?.validate()) {
+                    case null || false:
+                      Messages.showError('Formulário invalido',context);
+                    case true:
+                      userRegisterVM.register(
+                          name: nameEC.text,
+                          email: emailEC.text,
+                          password: passwordEC.text);
+                  }
+                },
+                child: const Text('CRIAR CONTA'),
+              )
+            ]),
           ),
-        )),
+        ),
       ),
     );
   }

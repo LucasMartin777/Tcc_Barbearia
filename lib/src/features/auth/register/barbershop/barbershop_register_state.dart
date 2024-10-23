@@ -1,4 +1,4 @@
-enum BarbershopRegisterStateStatus { inital, success, error }
+enum BarbershopRegisterStateStatus { initial, success, error }
 
 class BarbershopRegisterState {
   final BarbershopRegisterStateStatus status;
@@ -7,26 +7,25 @@ class BarbershopRegisterState {
 
   BarbershopRegisterState.initial()
       : this(
-          status: BarbershopRegisterStateStatus.inital,
+          status: BarbershopRegisterStateStatus.initial,
           openingDays: <String>[],
           openingHours: <int>[],
         );
 
-    BarbershopRegisterState({
+  BarbershopRegisterState({
     required this.status,
     required this.openingDays,
-    required this.openingHours
+    required this.openingHours,
   });
 
   BarbershopRegisterState copyWith({
     BarbershopRegisterStateStatus? status,
     List<String>? openingDays,
-    List<int>? openingHours    
+    List<int>? openingHours,
   }) {
     return BarbershopRegisterState(
-          status: status ?? this.status,
-      openingDays: openingDays ?? this.openingDays,
-      openingHours: openingHours ?? this.openingHours
-    );
+        status: status ?? this.status,
+        openingDays: openingDays ?? this.openingDays,
+        openingHours: openingHours ?? this.openingHours);
   }
 }

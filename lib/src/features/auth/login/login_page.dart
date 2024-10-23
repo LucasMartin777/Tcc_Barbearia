@@ -56,14 +56,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         child: DecoratedBox(
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage(
-                  ImageConstants.backgroundChair,
-                ),
-                opacity: 0.2,
-                fit: BoxFit.cover),
+              image: AssetImage(ImageConstants.backgroundChair),
+              opacity: 0.2,
+              fit: BoxFit.cover,
+            ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.all(30.0),
             child: CustomScrollView(
               slivers: [
                 SliverFillRemaining(
@@ -81,10 +80,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           TextFormField(
                             onTapOutside: (_) => context.unfocus(),
                             validator: Validatorless.multiple([
-                              Validatorless.required('E-mail obrigatório'),
-                              Validatorless.email('E-mail inválido')
+                              Validatorless.required('E-mail obrigatorio'),
+                              Validatorless.email('E-mail invalido')
                             ]),
-                            controller: emailEC,
+                            controller: emailEC, //..text = 'caneto@gmail.com',
                             decoration: const InputDecoration(
                               label: Text('E-mail'),
                               hintText: 'E-mail',
@@ -100,12 +99,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           TextFormField(
                             onTapOutside: (_) => context.unfocus(),
                             validator: Validatorless.multiple([
-                              Validatorless.required('Senha obrigatório'),
+                              Validatorless.required('Senha obrigatoria'),
                               Validatorless.min(6,
                                   'Senha deve conter pelo menos 6 caracteres'),
                             ]),
                             obscureText: true,
-                            controller: passwordEC,
+                            controller: passwordEC, //..text = '123123',
                             decoration: const InputDecoration(
                               label: Text('Senha'),
                               hintText: 'Senha',
@@ -123,7 +122,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             child: Text(
                               'Esqueceu a senha?',
                               style: TextStyle(
-                                  fontSize: 12, color: ColorsConstants.brow),
+                                fontSize: 12,
+                                color: ColorsConstants.brow,
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -137,13 +138,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 case (false || null):
                                   Messages.showError(
                                       'Campos inválidos', context);
-                                  break;
                                 case true:
                                   login(emailEC.text, passwordEC.text);
                               }
                             },
-                            child: const Text('ACESSAR'),
-                          ),
+                            child: const Text(
+                              'ACESSAR',
+                            ),
+                          )
                         ],
                       ),
                       Align(
@@ -154,7 +156,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 .pushNamed('/auth/register/user');
                           },
                           child: const Text(
-                            'Criar Conta',
+                            'Criar conta',
                             style: TextStyle(
                               fontSize: 16,
                               color: Colors.white,
@@ -165,7 +167,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       )
                     ],
                   ),
-                ),
+                )
               ],
             ),
           ),

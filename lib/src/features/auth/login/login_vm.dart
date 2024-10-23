@@ -14,7 +14,7 @@ class LoginVm extends _$LoginVm {
   LoginState build() => LoginState.initial();
 
   Future<void> login(String email, String password) async {
-    final loaderHandler = AsyncLoaderHandler()..start();
+    final loaderHendler = AsyncLoaderHandler()..start();
 
     final loginService = ref.watch(userLoginServiceProvider);
 
@@ -35,10 +35,8 @@ class LoginVm extends _$LoginVm {
         break;
       case Failure(exception: ServiceException(:final message)):
         state = state.copyWith(
-          status: LoginStateStatus.error,
-          errorMessage: () => message,
-        );
+            status: LoginStateStatus.error, errorMessage: () => message);
     }
-    loaderHandler.close();
+    loaderHendler.close();
   }
 }

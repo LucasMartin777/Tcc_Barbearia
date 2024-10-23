@@ -18,8 +18,8 @@ class _SplashPageState extends ConsumerState<SplashPage> {
   var _scale = 10.0;
   var _animationOpacityLogo = 0.0;
 
-  double get _logoAnimatedWidth => 100 * _scale;
-  double get _logoAnimatedHeight => 120 * _scale;
+  double get _logoAnimetionWidth => 100 * _scale;
+  double get _logoAnimetionHeight => 120 * _scale;
 
   @override
   void initState() {
@@ -32,71 +32,80 @@ class _SplashPageState extends ConsumerState<SplashPage> {
     super.initState();
   }
 
+  //void _redirect(String routeName) {}
+
   @override
   Widget build(BuildContext context) {
     ref.listen(splashVmProvider, (_, state) {
-      state.whenOrNull(error: (error, stackTrace) {
-        log('Erro ao validar o login', error: error, stackTrace: stackTrace);
-        Messages.showError('Erro ao validar login', context);
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/auth/login', (route) => false);
-      }, data: (data) {
-        switch (data) {
-          case SplashState.loggedADM:
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil('/home/adm', (route) => false);
-          case SplashState.loggedEmployee:
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil('/home/employee', (route) => false);
-          case _:
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil('/auth/login', (route) => false);
-        }
-      });
+      state.whenOrNull(
+        error: (error, stackTrace) {
+          log('Erro ao Validar', error: error, stackTrace: stackTrace);
+          Messages.showError('Erro ao Validar o login',context);
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('/auth/login', (route) => false);
+        },
+        data: (data) {
+          switch (data) {
+            case SplashState.loggedADM:
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/home/adm', (route) => false);
+            case SplashState.loggedEmployee:
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/home/employee', (route) => false);
+            case _:
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/auth/login', (route) => false);
+          }
+        },
+      );
     });
     return Scaffold(
       backgroundColor: Colors.black,
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(
-                ImageConstants.backgroundChair,
-              ),
-              opacity: 0.2,
-              fit: BoxFit.cover),
+            image: AssetImage(
+              ImageConstants.backgroundChair,
+            ),
+            opacity: 0.2,
+            fit: BoxFit.cover,
+          ),
         ),
         child: Center(
           child: AnimatedOpacity(
-            duration: const Duration(seconds: 3),
-            curve: Curves.easeIn,
-            opacity: _animationOpacityLogo,
-            onEnd: () {
-              Navigator.of(context).pushAndRemoveUntil(
-                PageRouteBuilder(
-                  settings: const RouteSettings(name: '/auth/login'),
-                  pageBuilder: (context, animation, secondaryAnimation) {
-                    return const LoginPage();
-                  },
-                  transitionsBuilder: (_, animation, __, child) {
-                    return FadeTransition(
-                      opacity: animation,
-                      child: child,
-                    );
-                  },
-                ),
-                (route) => false,
-              );
-            },
-            child: AnimatedContainer(
-                duration: const Duration(seconds: 3),
-                width: _logoAnimatedWidth,
-                height: _logoAnimatedHeight,
-                curve: Curves.linearToEaseOut,
-                child: Image.asset(
-                  ImageConstants.imageLogo,
-                  fit: BoxFit.cover,
-                )),
-          ),
+              duration: const Duration(seconds: 3),
+              curve: Curves.easeIn,
+              opacity: _animationOpacityLogo,
+              onEnd: () {
+                Navigator.of(context).pushAndRemoveUntil(
+                  PageRouteBuilder(
+                    settings: const RouteSettings(name: '/auth/login'),
+                    pageBuilder: (
+                      context,
+                      animation,
+                      secondaryAnimation,
+                    ) {
+                      return const LoginPage();
+                    },
+                    transitionsBuilder: (_, animation, __, child) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      );
+                    },
+                  ),
+                  (router) => false,
+                );
+              },
+              child: AnimatedContainer(
+                  duration: const Duration(seconds: 3),
+                  width: _logoAnimetionWidth,
+                  height: _logoAnimetionHeight,
+                  curve: Curves.linearToEaseOut,
+                  child: Image.asset(
+                    ImageConstants.imageLogo,
+                    fit: BoxFit.cover,
+                  ))),
         ),
       ),
     );

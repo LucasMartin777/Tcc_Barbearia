@@ -7,11 +7,12 @@ part 'barbershop_register_vm.g.dart';
 
 @riverpod
 class BarbershopRegisterVm extends _$BarbershopRegisterVm {
+  @override
   BarbershopRegisterState build() => BarbershopRegisterState.initial();
 
   void addOrRemoveOpenDay(String weekDay) {
     final openingDays = state.openingDays;
-    if (openingDays.contains(weekDay)) {
+    if(openingDays.contains(weekDay)) {
       openingDays.remove(weekDay);
     } else {
       openingDays.add(weekDay);
@@ -20,9 +21,10 @@ class BarbershopRegisterVm extends _$BarbershopRegisterVm {
     state = state.copyWith(openingDays: openingDays);
   }
 
+
   void addOrRemoveOpenHour(int hour) {
     final openingHours = state.openingHours;
-    if (openingHours.contains(hour)) {
+    if(openingHours.contains(hour)) {
       openingHours.remove(hour);
     } else {
       openingHours.add(hour);
@@ -31,24 +33,28 @@ class BarbershopRegisterVm extends _$BarbershopRegisterVm {
     state = state.copyWith(openingHours: openingHours);
   }
 
-  Future<void> register(String name, String email) async {
+
+  Future<void> register({required String name, required String email}) async {
     final repository = ref.watch(barbershopRepositoryProvider);
+
     final BarbershopRegisterState(:openingDays, :openingHours) = state;
 
     final dto = (
       name: name,
       email: email,
       openingDays: openingDays,
-      openingHours: openingHours,
+      openingHours: openingHours
     );
+
     final registerResult = await repository.save(dto);
 
-    switch (registerResult) {
+    switch(registerResult) {
       case Success():
-      ref.invalidate(getMyBarbershopProvider);
+        ref.invalidate(getMyBarbershopProvider);
         state = state.copyWith(status: BarbershopRegisterStateStatus.success);
       case Failure():
         state = state.copyWith(status: BarbershopRegisterStateStatus.error);
     }
   }
+
 }

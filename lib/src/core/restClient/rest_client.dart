@@ -10,7 +10,10 @@ final class RestClient extends DioForNative {
           receiveTimeout: const Duration(seconds: 60),
         )) {
     interceptors.addAll([
-      LogInterceptor(request: true, responseBody: true),
+      LogInterceptor(
+        requestBody: true,
+        responseBody: true,
+      ),
       AuthInterceptor(),
     ]);
   }
@@ -20,7 +23,7 @@ final class RestClient extends DioForNative {
     return this;
   }
 
-  RestClient get unauth {
+  RestClient get unAuth {
     options.extra['DIO_AUTH_KEY'] = false;
     return this;
   }

@@ -4,6 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
- await initializeDateFormatting();
+  await initializeDateFormatting();
   runApp(const ProviderScope(child: BarbershopApp()));
 }

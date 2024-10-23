@@ -16,12 +16,15 @@ part 'application_providers.g.dart';
 
 @Riverpod(keepAlive: true)
 RestClient restClient(RestClientRef ref) => RestClient();
+
 @Riverpod(keepAlive: true)
 UserRepository userRepository(UserRepositoryRef ref) =>
     UserRepositoryImpl(restClient: ref.read(restClientProvider));
+
 @Riverpod(keepAlive: true)
 UserLoginService userLoginService(UserLoginServiceRef ref) =>
     UserLoginServiceImpl(userRepository: ref.read(userRepositoryProvider));
+
 @Riverpod(keepAlive: true)
 Future<UserModel> getMe(GetMeRef ref) async {
   final result = await ref.watch(userRepositoryProvider).me();
@@ -41,9 +44,10 @@ Future<BarbershopModel> getMyBarbershop(GetMyBarbershopRef ref) async {
   final userModel = await ref.watch(getMeProvider.future);
   final barbershopRepository = ref.watch(barbershopRepositoryProvider);
   final result = await barbershopRepository.getMyBarbershop(userModel);
+
   return switch (result) {
     Success(value: final barbershop) => barbershop,
-    Failure(:final exception) => throw exception
+    Failure(:final exception) => throw exception,
   };
 }
 
@@ -52,6 +56,8 @@ Future<void> logout(LogoutRef ref) async {
   final sp = await SharedPreferences.getInstance();
   sp.clear();
 
+  ref.invalidate(getMeProvider);
+  ref.invalidate(getMyBarbershopProvider);
   Navigator.of(BarbershopNavGlobalKey.instance.navKey.currentContext!)
       .pushNamedAndRemoveUntil('/auth/login', (route) => false);
   await Future.delayed(const Duration(milliseconds: 500));

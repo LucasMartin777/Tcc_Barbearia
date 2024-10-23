@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 enum LoginStateStatus {
   initial,
@@ -10,6 +11,7 @@ enum LoginStateStatus {
 class LoginState {
   final LoginStateStatus status;
   final String? errorMessage;
+
   LoginState.initial() : this(status: LoginStateStatus.initial);
 
   LoginState({
@@ -22,8 +24,8 @@ class LoginState {
     ValueGetter<String?>? errorMessage,
   }) {
     return LoginState(
-        status: status ?? this.status,
-        errorMessage:
-            errorMessage != null ? errorMessage() : this.errorMessage);
+      status: status ?? this.status,
+      errorMessage: errorMessage != null ? errorMessage() : this.errorMessage,
+    );
   }
 }

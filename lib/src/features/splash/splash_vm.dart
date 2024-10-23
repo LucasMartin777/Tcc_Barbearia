@@ -11,7 +11,7 @@ enum SplashState {
   login,
   loggedADM,
   loggedEmployee,
-  error;
+  error,
 }
 
 @riverpod
@@ -19,8 +19,8 @@ class SplashVm extends _$SplashVm {
   @override
   Future<SplashState> build() async {
     final sp = await SharedPreferences.getInstance();
+
     if (sp.containsKey(LocalStorageKeys.accessToken)) {
-      await Future.delayed(const Duration(milliseconds: 500));
       ref.invalidate(getMeProvider);
       ref.invalidate(getMyBarbershopProvider);
 
@@ -28,7 +28,7 @@ class SplashVm extends _$SplashVm {
         final userModel = await ref.watch(getMeProvider.future);
         return switch (userModel) {
           UserModelADM() => SplashState.loggedADM,
-          UserModelEmployee() => SplashState.loggedEmployee
+          UserModelEmployee() => SplashState.loggedEmployee,
         };
       } catch (e) {
         return SplashState.login;

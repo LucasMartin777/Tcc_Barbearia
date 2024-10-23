@@ -12,26 +12,24 @@ import 'package:barbearia_tcc/src/model/user_model.dart';
 import './barbershop_repository.dart';
 
 class BarbershopRepositoryImpl implements BarbershopRepository {
-  final RestClient restClient;
-  BarbershopRepositoryImpl({
-    required this.restClient,
-  });
+  final RestClient _restClient;
+
+  BarbershopRepositoryImpl({required RestClient restClient})
+      : _restClient = restClient;
 
   @override
   Future<Either<RepositoryException, BarbershopModel>> getMyBarbershop(
       UserModel userModel) async {
     switch (userModel) {
       case UserModelADM():
-        final Response(data: List(first: data)) = await restClient.auth.get(
+        final Response(data: List(first: data)) = await _restClient.auth.get(
           '/barbershop',
           queryParameters: {'user_id': '#userAuthRef'},
         );
         return Success(BarbershopModel.fromMap(data));
-
       case UserModelEmployee():
-        final Response(:data) = await restClient.auth.get(
-          '/barbershop/${userModel.barbershopId}',
-        );
+        final Response(:data) =
+            await _restClient.auth.get('/barbershop/${userModel.barbershopId}');
         return Success(BarbershopModel.fromMap(data));
     }
   }
@@ -39,24 +37,24 @@ class BarbershopRepositoryImpl implements BarbershopRepository {
   @override
   Future<Either<RepositoryException, Nil>> save(
       ({
-        String name,
         String email,
+        String name,
         List<String> openingDays,
-        List<int> openingHours
+        List<int> openingHours,
       }) data) async {
     try {
-      await restClient.auth.post('/barbershop', data: {
+      await _restClient.auth.post('/barbershop', data: {
         'user_id': '#userAuthRef',
         'name': data.name,
         'email': data.email,
         'opening_days': data.openingDays,
         'opening_hours': data.openingHours,
       });
+
       return Success(nil);
     } on DioException catch (e, s) {
       log('Erro ao registrar barbearia', error: e, stackTrace: s);
-      return Failure(
-          RepositoryException(message: 'Erro ao registrar barbearia'));
+      return Failure(RepositoryException(message: 'Erro ao registrar barbearia'));
     }
   }
 }
