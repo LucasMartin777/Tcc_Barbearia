@@ -1,4 +1,4 @@
-import 'package:barbearia_tcc/src/core/constants/local_storage_keys.dart';
+import 'package:barbearia_tcc/src/core/constants/local_storage_key.dart';
 import 'package:barbearia_tcc/src/core/providers/application_providers.dart';
 import 'package:barbearia_tcc/src/model/user_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

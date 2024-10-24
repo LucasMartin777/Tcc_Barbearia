@@ -1,7 +1,7 @@
 import 'package:asyncstate/asyncstate.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
 import 'package:barbearia_tcc/src/core/providers/application_providers.dart';
-import 'package:barbearia_tcc/src/features/home/adm/widgets/home_adm_state.dart';
+import 'package:barbearia_tcc/src/features/home/adm/home_adm_state.dart';
 import 'package:barbearia_tcc/src/model/barbershop_model.dart';
 import 'package:barbearia_tcc/src/model/user_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

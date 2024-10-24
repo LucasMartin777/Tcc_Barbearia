@@ -1,10 +1,11 @@
 import 'dart:developer';
 
+import 'package:barbearia_tcc/src/core/providers/application_providers.dart';
 import 'package:barbearia_tcc/src/core/ui/barbershop_icons.dart';
 import 'package:barbearia_tcc/src/core/ui/constants.dart';
 import 'package:barbearia_tcc/src/core/ui/widgets/barbershop_loader.dart';
-import 'package:barbearia_tcc/src/features/home/adm/widgets/home_adm_state.dart';
-import 'package:barbearia_tcc/src/features/home/adm/widgets/home_adm_vm.dart';
+import 'package:barbearia_tcc/src/features/home/adm/home_adm_state.dart';
+import 'package:barbearia_tcc/src/features/home/adm/home_adm_vm.dart';
 import 'package:barbearia_tcc/src/features/home/adm/widgets/home_employee_title.dart';
 import 'package:barbearia_tcc/src/features/home/widgets/home_header.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,7 @@ class HomeAdmPage extends ConsumerWidget {
         backgroundColor: ColorsConstants.brow,
         onPressed: () async {
           await Navigator.of(context).pushNamed('/employee/register');
+          ref.invalidate(getMeProvider);
           ref.invalidate(homeAdmVmProvider);
         },
         child: const CircleAvatar(

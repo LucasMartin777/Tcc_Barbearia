@@ -2,7 +2,7 @@ import 'package:barbearia_tcc/src/core/providers/application_providers.dart';
 import 'package:barbearia_tcc/src/core/ui/barbershop_icons.dart';
 import 'package:barbearia_tcc/src/core/ui/constants.dart';
 import 'package:barbearia_tcc/src/core/ui/widgets/barbershop_loader.dart';
-import 'package:barbearia_tcc/src/features/home/adm/widgets/home_adm_vm.dart';
+import 'package:barbearia_tcc/src/features/home/adm/home_adm_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

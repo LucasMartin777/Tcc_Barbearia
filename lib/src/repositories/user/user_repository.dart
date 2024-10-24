@@ -1,5 +1,5 @@
 import 'package:barbearia_tcc/src/core/exceptions/auth_exception.dart';
-import 'package:barbearia_tcc/src/core/exceptions/repository_exception.dart';
+import 'package:barbearia_tcc/src/core/exceptions/repository_execption.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/nil.dart';
 import 'package:barbearia_tcc/src/model/user_model.dart';

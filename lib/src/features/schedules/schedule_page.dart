@@ -2,7 +2,6 @@ import 'package:barbearia_tcc/src/core/ui/barbershop_icons.dart';
 import 'package:barbearia_tcc/src/core/ui/constants.dart';
 import 'package:barbearia_tcc/src/core/ui/helpers/form_helper.dart';
 import 'package:barbearia_tcc/src/core/ui/helpers/messages.dart';
-import 'package:barbearia_tcc/src/core/ui/widgets/avatar_widget.dart';
 import 'package:barbearia_tcc/src/core/ui/widgets/hours_panel.dart';
 import 'package:barbearia_tcc/src/features/schedules/schedule_sate.dart';
 import 'package:barbearia_tcc/src/features/schedules/schedule_vm.dart';

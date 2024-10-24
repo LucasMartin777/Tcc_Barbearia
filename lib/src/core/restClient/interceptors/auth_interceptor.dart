@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:barbearia_tcc/src/core/constants/local_storage_keys.dart';
+import 'package:barbearia_tcc/src/core/constants/local_storage_key.dart';
 import 'package:barbearia_tcc/src/core/ui/barbershop_nav_global_key.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class AuthInterceptor extends Interceptor {
       final sp = await SharedPreferences.getInstance();
 
       headers.addAll({
-        authHeaderKey: 'Bearer ${sp.getString(LocalStorageKeys.accessToken)}'
+        authHeaderKey: 'Bearer ${sp.getString(LocalStorageKey.accessToken)}'
       });
     }
 

@@ -62,9 +62,6 @@ Future<void> logout(LogoutRef ref) async {
   ref.invalidate(getMyBarbershopProvider);
   Navigator.of(BarbershopNavGlobalKey.instance.navKey.currentContext!)
       .pushNamedAndRemoveUntil('/auth/login', (route) => false);
-  await Future.delayed(const Duration(milliseconds: 500));
-  ref.invalidate(getMeProvider);
-  ref.invalidate(getMyBarbershopProvider);
 }
 
 @riverpod

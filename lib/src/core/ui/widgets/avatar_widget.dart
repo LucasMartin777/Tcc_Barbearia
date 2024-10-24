@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 class AvatarWidget extends StatelessWidget {
   final bool hideUploadButton;
-  const AvatarWidget({super.key, this.hideUploadButton = false});
+
+  const AvatarWidget({super.key}) : hideUploadButton = false;
+  const AvatarWidget.withoutButton({super.key}) : hideUploadButton = true;
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +32,7 @@ class AvatarWidget extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border.all(
-                      color: ColorsConstants.brow,
-                      width: 4,
-                    ),
+                    border: Border.all(color: ColorsConstants.brow, width: 4),
                     shape: BoxShape.circle),
                 child: const Icon(
                   BarbershopIcons.addEmployee,

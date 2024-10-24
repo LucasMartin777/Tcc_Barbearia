@@ -1,4 +1,4 @@
-import 'package:barbearia_tcc/src/core/constants/local_storage_keys.dart';
+import 'package:barbearia_tcc/src/core/constants/local_storage_key.dart';
 import 'package:barbearia_tcc/src/core/exceptions/auth_exception.dart';
 import 'package:barbearia_tcc/src/core/exceptions/service_exception.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';

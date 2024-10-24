@@ -48,10 +48,10 @@ class _EmployeeRegisterPageState extends ConsumerState<EmployeeRegisterPage> {
         case EmployeeRegisterStateStatus.initial:
           break;
         case EmployeeRegisterStateStatus.success:
-          Messages.showSuccess('Colaborador cadastrado com sucesso', context);
+          context.showSuccess('Colaborador cadastrado com sucesso');
           Navigator.of(context).pop();
         case EmployeeRegisterStateStatus.error:
-          Messages.showError('Erro ao registrar colaborador', context);
+          context.showError('Erro ao registrar colaborador');
       }
     });
 
@@ -159,7 +159,7 @@ class _EmployeeRegisterPageState extends ConsumerState<EmployeeRegisterPage> {
                             height: 24,
                           ),
                           WeekdaysPanel(
-                              enableDays: openingDays,
+                              enabledDays: openingDays,
                               onDayPressed:
                                   employeeeRegisterVM.addOrRemoveWorkdays),
                           const SizedBox(
@@ -180,8 +180,7 @@ class _EmployeeRegisterPageState extends ConsumerState<EmployeeRegisterPage> {
                             onPressed: () {
                               switch (formKey.currentState?.validate()) {
                                 case null || false:
-                                  Messages.showError(
-                                      'Existem campos inválidos', context);
+                                  context.showError('Existem campos inválidos');
                                 case true:
                                   final EmployeeRegisterState(
                                     workdays: List(isNotEmpty: hasWorkDays),
@@ -189,9 +188,8 @@ class _EmployeeRegisterPageState extends ConsumerState<EmployeeRegisterPage> {
                                   ) = ref.watch(employeeRegisterVmProvider);
 
                                   if (!hasWorkDays || !hasWorkHours) {
-                                    Messages.showError(
-                                        'Por favor selecione os dias das semana e horário de atendimento',
-                                        context);
+                                    context.showError(
+                                        'Por favor selecione os dias das semana e horário de atendimento');
                                     return;
                                   }
 

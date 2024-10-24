@@ -12,7 +12,7 @@ class BarbershopRegisterVm extends _$BarbershopRegisterVm {
 
   void addOrRemoveOpenDay(String weekDay) {
     final openingDays = state.openingDays;
-    if(openingDays.contains(weekDay)) {
+    if (openingDays.contains(weekDay)) {
       openingDays.remove(weekDay);
     } else {
       openingDays.add(weekDay);
@@ -21,10 +21,9 @@ class BarbershopRegisterVm extends _$BarbershopRegisterVm {
     state = state.copyWith(openingDays: openingDays);
   }
 
-
   void addOrRemoveOpenHour(int hour) {
     final openingHours = state.openingHours;
-    if(openingHours.contains(hour)) {
+    if (openingHours.contains(hour)) {
       openingHours.remove(hour);
     } else {
       openingHours.add(hour);
@@ -32,7 +31,6 @@ class BarbershopRegisterVm extends _$BarbershopRegisterVm {
 
     state = state.copyWith(openingHours: openingHours);
   }
-
 
   Future<void> register({required String name, required String email}) async {
     final repository = ref.watch(barbershopRepositoryProvider);
@@ -48,7 +46,7 @@ class BarbershopRegisterVm extends _$BarbershopRegisterVm {
 
     final registerResult = await repository.save(dto);
 
-    switch(registerResult) {
+    switch (registerResult) {
       case Success():
         ref.invalidate(getMyBarbershopProvider);
         state = state.copyWith(status: BarbershopRegisterStateStatus.success);
@@ -56,5 +54,4 @@ class BarbershopRegisterVm extends _$BarbershopRegisterVm {
         state = state.copyWith(status: BarbershopRegisterStateStatus.error);
     }
   }
-
 }
