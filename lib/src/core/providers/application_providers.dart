@@ -5,6 +5,8 @@ import 'package:barbearia_tcc/src/model/barbershop_model.dart';
 import 'package:barbearia_tcc/src/model/user_model.dart';
 import 'package:barbearia_tcc/src/repositories/barbershop/barbershop_repository.dart';
 import 'package:barbearia_tcc/src/repositories/barbershop/barbershop_repository_impl.dart';
+import 'package:barbearia_tcc/src/repositories/schedule/schedule_repository.dart';
+import 'package:barbearia_tcc/src/repositories/schedule/schedule_repository_impl.dart';
 import 'package:barbearia_tcc/src/repositories/user/user_repository.dart';
 import 'package:barbearia_tcc/src/repositories/user/user_repository_impl.dart';
 import 'package:barbearia_tcc/src/services/user_login/user_login_service.dart';
@@ -64,3 +66,7 @@ Future<void> logout(LogoutRef ref) async {
   ref.invalidate(getMeProvider);
   ref.invalidate(getMyBarbershopProvider);
 }
+
+@riverpod
+ScheduleRepository scheduleRepository(ScheduleRepositoryRef ref) =>
+    ScheduleRepositoryImpl(restClient: ref.read(restClientProvider));

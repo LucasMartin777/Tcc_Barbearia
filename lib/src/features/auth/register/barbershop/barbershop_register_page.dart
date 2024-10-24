@@ -88,7 +88,7 @@ class _BarbershopRegisterPageState
               ),
               const SizedBox(height: 24),
               HoursPanel(
-                starTime: 6,
+                startTime: 6,
                 endTime: 23,
                 onHourPressed: (int value) {
                   barbershopRegisterVM.addOrRemoveOpenHour(value);

@@ -4,20 +4,26 @@ import 'package:barbearia_tcc/src/core/ui/helpers/form_helper.dart';
 import 'package:barbearia_tcc/src/core/ui/helpers/messages.dart';
 import 'package:barbearia_tcc/src/core/ui/widgets/avatar_widget.dart';
 import 'package:barbearia_tcc/src/core/ui/widgets/hours_panel.dart';
+import 'package:barbearia_tcc/src/features/schedules/schedule_sate.dart';
+import 'package:barbearia_tcc/src/features/schedules/schedule_vm.dart';
 import 'package:barbearia_tcc/src/features/schedules/widgets/schedule_calendar.dart';
+import 'package:barbearia_tcc/src/model/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:validatorless/validatorless.dart';
 
-class SchedulePage extends StatefulWidget {
-  const SchedulePage({super.key});
+class SchedulePage extends ConsumerStatefulWidget {
+  const SchedulePage({
+    super.key,
+  });
 
   @override
-  State<SchedulePage> createState() => _SchedulePageState();
+  ConsumerState<SchedulePage> createState() => _SchedulePageState();
 }
 
-class _SchedulePageState extends State<SchedulePage> {
-  var dateFOrmat = DateFormat('dd/MM/yyyy');
+class _SchedulePageState extends ConsumerState<SchedulePage> {
+  var dateFormat = DateFormat('dd/MM/yyyy');
   var showCalendar = false;
   final formKey = GlobalKey<FormState>();
   final clientEC = TextEditingController();
@@ -32,9 +38,38 @@ class _SchedulePageState extends State<SchedulePage> {
 
   @override
   Widget build(BuildContext context) {
+    final userModel = ModalRoute.of(context)!.settings.arguments as UserModel;
+    final scheduleVM = ref.watch(scheduleVmProvider.notifier);
+
+    final employeeData = switch (userModel) {
+      UserModelADM(:final workDays, :final workHours) => (
+          workDays: workDays!,
+          workHours: workHours!,
+        ),
+      UserModelEmployee(:final workDays, :final workHours) => (
+          workDays: workDays,
+          workHours: workHours,
+        ),
+    };
+
+    ref.listen(
+      scheduleVmProvider.select((state) => state.status),
+      (_, status) {
+        switch (status) {
+          case ScheduleStateStatus.initial:
+            break;
+          case ScheduleStateStatus.success:
+            Messages.showSuccess('Cliente agendado com sucesso', context);
+            Navigator.of(context).pop();
+          case ScheduleStateStatus.error:
+            Messages.showError('Erro ao registrar agendamento', context);
+        }
+      },
+    );
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Agendar Cliente'),
+        title: const Text('Agendar cliente'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -44,32 +79,33 @@ class _SchedulePageState extends State<SchedulePage> {
             child: Center(
               child: Column(
                 children: [
-                  const AvatarWidget(
-                    hideUploadButton: true,
-                  ),
+                  //    const AvatarWidget.withoutButton(),
                   const SizedBox(
                     height: 24,
                   ),
-                  const Text(
-                    'Nome e Sobrenome',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  Text(
+                    userModel.name,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   const SizedBox(
                     height: 37,
                   ),
                   TextFormField(
                     controller: clientEC,
-                    validator: Validatorless.required('Cliente obrigatório'),
+                    validator: Validatorless.required('Cliente obrigatório'),
                     decoration: const InputDecoration(label: Text('Cliente')),
                   ),
                   const SizedBox(
-                    height: 32,
+                    height: 28,
                   ),
                   TextFormField(
                     readOnly: true,
                     controller: dateEC,
                     validator: Validatorless.required(
-                        'selecione a data do agendamento'),
+                        'Selecione a data do agendamento'),
                     onTap: () {
                       setState(() {
                         showCalendar = true;
@@ -78,7 +114,7 @@ class _SchedulePageState extends State<SchedulePage> {
                     },
                     decoration: const InputDecoration(
                       label: Text('Selecione uma data'),
-                      hintText: 'selecione uma data',
+                      hintText: 'Selecione uma data',
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       suffixIcon: Icon(
                         BarbershopIcons.calendar,
@@ -100,12 +136,14 @@ class _SchedulePageState extends State<SchedulePage> {
                               showCalendar = false;
                             });
                           },
-                          okPressed: (DateTime value) {
+                          onPressed: (DateTime value) {
                             setState(() {
-                              dateEC.text = dateFOrmat.format(value);
+                              dateEC.text = dateFormat.format(value);
+                              scheduleVM.deteSelecte(value);
                               showCalendar = false;
                             });
                           },
+                          workDays: employeeData.workDays,
                         ),
                       ],
                     ),
@@ -113,27 +151,39 @@ class _SchedulePageState extends State<SchedulePage> {
                   const SizedBox(
                     height: 24,
                   ),
-                  HoursPanel(
-                    starTime: 6,
+                  HoursPanel.singleSelection(
+                    startTime: 6,
                     endTime: 23,
-                    onHourPressed: (hour) {},
-                    enableTimes: const [6, 7, 8],
+                    onHourPressed: scheduleVM.hourSelect,
+                    enabledTimes: employeeData.workHours,
                   ),
                   const SizedBox(
                     height: 24,
                   ),
                   ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: const Size.fromHeight(56),
-                      ),
-                      onPressed: () {
-                        switch (formKey.currentState?.validate()) {
-                          case null || false:
+                    style: ElevatedButton.styleFrom(
+                        minimumSize: const Size.fromHeight(56)),
+                    onPressed: () {
+                      switch (formKey.currentState?.validate()) {
+                        case (false || null):
+                          Messages.showError('Dados incompletos', context);
+                        case true:
+                          final hourSelected = ref.watch(
+                            scheduleVmProvider
+                                .select((state) => state.scheduleTime != null),
+                          );
+                          if (hourSelected) {
+                            scheduleVM.register(
+                              userModel: userModel,
+                              clientName: clientEC.text,
+                            );
+                          } else {
                             Messages.showError('Dados incompletos', context);
-                          case true:
-                        }
-                      },
-                      child: const Text('AGENDAR'))
+                          }
+                      }
+                    },
+                    child: const Text('AGENDAR'),
+                  )
                 ],
               ),
             ),

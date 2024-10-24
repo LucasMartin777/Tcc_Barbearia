@@ -53,7 +53,8 @@ class HomeEmployeeTitle extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                       ),
                       onPressed: () {
-                        Navigator.of(context).pushNamed('/schedule');
+                        Navigator.of(context)
+                            .pushNamed('/schedule', arguments: employee);
                       },
                       child: const Text('AGENDAR'),
                     ),
@@ -61,7 +62,10 @@ class HomeEmployeeTitle extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/employee/schedule',
+                            arguments: employee);
+                      },
                       child: const Text('VER AGENDA'),
                     ),
                     const Icon(

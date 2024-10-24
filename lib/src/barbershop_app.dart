@@ -6,10 +6,12 @@ import 'package:barbearia_tcc/src/features/auth/login/login_page.dart';
 import 'package:barbearia_tcc/src/features/auth/register/barbershop/barbershop_register_page.dart';
 import 'package:barbearia_tcc/src/features/auth/register/user/user_register_page.dart';
 import 'package:barbearia_tcc/src/features/employee/register/employee_register_page.dart';
+import 'package:barbearia_tcc/src/features/employee/schedule/employee_schedule_page.dart';
 import 'package:barbearia_tcc/src/features/home/adm/widgets/home_adm_page.dart';
 import 'package:barbearia_tcc/src/features/schedules/schedule_page.dart';
 import 'package:barbearia_tcc/src/features/splash/splash_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class BarbershopApp extends StatelessWidget {
   const BarbershopApp({super.key});
@@ -31,13 +33,20 @@ class BarbershopApp extends StatelessWidget {
             '/auth/register/user': (_) => const UserRegisterPage(),
             '/auth/register/barebershop': (_) => const BarbershopRegisterPage(),
             '/home/adm': (_) => const HomeAdmPage(),
-         //   '/home/employee': (_) => const HomeEmployeePage(),
+            // '/home/employee': (_) => const HomeEmployeePage(),
             '/employee/register': (_) => const EmployeeRegisterPage(),
-          //  '/employee/schedule': (_) => const EmployeeSchedulePage(),
+            '/employee/schedule': (_) => const EmployeeSchedulePage(),
             '/schedule': (_) => const SchedulePage(),
           },
-
-          );
-        });
+          locale: const Locale('pt', 'BR'),
+          supportedLocales: const [Locale('pt', 'BR')],
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+        );
+      },
+    );
   }
 }
