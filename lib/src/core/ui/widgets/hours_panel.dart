@@ -123,10 +123,10 @@ class _TimeButtonState extends State<TimeButton> {
       }
     }
 
-    final textColor = selected ? Colors.white : ColorsConstants.grey;
-    var buttonColor = selected ? ColorsConstants.brow : Colors.white;
+    final textColor = selected ? Colors.white : ColorConstants.grey;
+    var buttonColor = selected ? ColorConstants.brow : Colors.white;
     final buttonBorderColor =
-        selected ? ColorsConstants.brow : ColorsConstants.grey;
+        selected ? ColorConstants.brow : ColorConstants.grey;
 
     final disableTime = enabledTimes != null && !enabledTimes.contains(value);
 

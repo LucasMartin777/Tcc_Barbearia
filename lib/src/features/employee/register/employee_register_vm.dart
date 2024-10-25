@@ -1,5 +1,5 @@
 import 'package:asyncstate/asyncstate.dart';
-import 'package:barbearia_tcc/src/core/exceptions/repository_execption.dart';
+import 'package:barbearia_tcc/src/core/exceptions/repository_exception.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/nil.dart';
 import 'package:barbearia_tcc/src/core/providers/application_providers.dart';
@@ -50,7 +50,7 @@ class EmployeeRegisterVm extends _$EmployeeRegisterVm {
     final UserRepository(:registerAdmAsEmployee, :registerEmployee) =
         ref.read(userRepositoryProvider);
 
-    final Either<RepositoryExecption, Nil> resultRegister;
+    final Either<RepositoryException, Nil> resultRegister;
 
     if (registerADM) {
       final dto = (workDays: workdays, workHours: workhours);

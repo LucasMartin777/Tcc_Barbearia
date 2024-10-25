@@ -35,9 +35,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         case LoginState(status: LoginStateStatus.initial):
           break;
         case LoginState(status: LoginStateStatus.error, :final errorMessage?):
-          context.showError(errorMessage);
+          Message.showError(errorMessage,context);
         case LoginState(status: LoginStateStatus.error):
-          context.showError('Erro ao realizar login');
+          Message.showError('Erro ao realizar login',context);
         case LoginState(status: LoginStateStatus.admLogin):
           Navigator.of(context)
               .pushNamedAndRemoveUntil('/home/adm', (route) => false);
@@ -123,7 +123,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               'Esqueceu a senha?',
                               style: TextStyle(
                                 fontSize: 12,
-                                color: ColorsConstants.brow,
+                                color: ColorConstants.brow,
                               ),
                             ),
                           ),
@@ -136,7 +136,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             onPressed: () {
                               switch (formKey.currentState?.validate()) {
                                 case (false || null):
-                                  context.showError('Campos inválidos');
+                                  Message.showError(
+                                      'Campos inválidos', context);
                                 case true:
                                   login(emailEC.text, passwordEC.text);
                               }

@@ -66,7 +66,7 @@ class _EmployeeSchedulePageState extends ConsumerState<EmployeeSchedulePage> {
                       allowViewNavigation: true,
                       view: CalendarView.day,
                       showNavigationArrow: true,
-                      todayHighlightColor: ColorsConstants.brow,
+                      todayHighlightColor: ColorConstants.brow,
                       showDatePickerButton: true,
                       showTodayButton: true,
                       dataSource: AppointmentDataSource(

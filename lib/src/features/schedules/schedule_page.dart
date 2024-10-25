@@ -2,6 +2,7 @@ import 'package:barbearia_tcc/src/core/ui/barbershop_icons.dart';
 import 'package:barbearia_tcc/src/core/ui/constants.dart';
 import 'package:barbearia_tcc/src/core/ui/helpers/form_helper.dart';
 import 'package:barbearia_tcc/src/core/ui/helpers/messages.dart';
+import 'package:barbearia_tcc/src/core/ui/widgets/avatar_widget.dart';
 import 'package:barbearia_tcc/src/core/ui/widgets/hours_panel.dart';
 import 'package:barbearia_tcc/src/features/schedules/schedule_sate.dart';
 import 'package:barbearia_tcc/src/features/schedules/schedule_vm.dart';
@@ -58,10 +59,10 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
           case ScheduleStateStatus.initial:
             break;
           case ScheduleStateStatus.success:
-            Messages.showSuccess('Cliente agendado com sucesso', context);
+            Message.showSuccess('Cliente agendado com sucesso', context);
             Navigator.of(context).pop();
           case ScheduleStateStatus.error:
-            Messages.showError('Erro ao registrar agendamento', context);
+            Message.showError('Erro ao registrar agendamento', context);
         }
       },
     );
@@ -78,7 +79,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
             child: Center(
               child: Column(
                 children: [
-                  //    const AvatarWidget.withoutButton(),
+                  const AvatarWidget.withoutButton(),
                   const SizedBox(
                     height: 24,
                   ),
@@ -117,7 +118,7 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                       floatingLabelBehavior: FloatingLabelBehavior.never,
                       suffixIcon: Icon(
                         BarbershopIcons.calendar,
-                        color: ColorsConstants.brow,
+                        color: ColorConstants.brow,
                         size: 18,
                       ),
                     ),
@@ -165,8 +166,9 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                     onPressed: () {
                       switch (formKey.currentState?.validate()) {
                         case (false || null):
-                          Messages.showError('Dados incompletos', context);
+                          Message.showError('Dados incompletos', context);
                         case true:
+                          //   login(emailEC.text, passwordEC.text);
                           final hourSelected = ref.watch(
                             scheduleVmProvider
                                 .select((state) => state.scheduleTime != null),
@@ -177,7 +179,9 @@ class _SchedulePageState extends ConsumerState<SchedulePage> {
                               clientName: clientEC.text,
                             );
                           } else {
-                            Messages.showError('Dados incompletos', context);
+                            Message.showError(
+                                'Por favor selecione um horário de atendimento',
+                                context);
                           }
                       }
                     },

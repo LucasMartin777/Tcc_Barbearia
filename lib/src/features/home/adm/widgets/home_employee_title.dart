@@ -3,13 +3,9 @@ import 'package:barbearia_tcc/src/core/ui/constants.dart';
 import 'package:barbearia_tcc/src/model/user_model.dart';
 import 'package:flutter/material.dart';
 
-class HomeEmployeeTile extends StatelessWidget {
+class HomeEmployeeTitle extends StatelessWidget {
   final UserModel employee;
-
-  const HomeEmployeeTile({
-    super.key,
-    required this.employee,
-  });
+  const HomeEmployeeTitle({super.key, required this.employee});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +16,7 @@ class HomeEmployeeTile extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: ColorConstants.colorBrown),
+        border: Border.all(color: ColorConstants.grey),
       ),
       child: Row(
         children: [
@@ -31,13 +27,13 @@ class HomeEmployeeTile extends StatelessWidget {
               image: DecorationImage(
                 image: switch (employee.avatar) {
                   final avatar? => NetworkImage(avatar),
-                  _ => const AssetImage(ImageConstants.avatar),
+                  _ => const AssetImage(ImageConstants.avatar)
                 } as ImageProvider,
               ),
             ),
           ),
           const SizedBox(
-            width: 10,
+            width: 12,
           ),
           Expanded(
             child: Column(
@@ -47,16 +43,15 @@ class HomeEmployeeTile extends StatelessWidget {
                 Text(
                   employee.name,
                   style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                  ),
+                      fontSize: 16, fontWeight: FontWeight.w500),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 12)),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                      ),
                       onPressed: () {
                         Navigator.of(context)
                             .pushNamed('/schedule', arguments: employee);
@@ -65,7 +60,8 @@ class HomeEmployeeTile extends StatelessWidget {
                     ),
                     OutlinedButton(
                       style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 12)),
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                      ),
                       onPressed: () {
                         Navigator.of(context).pushNamed('/employee/schedule',
                             arguments: employee);
@@ -75,12 +71,12 @@ class HomeEmployeeTile extends StatelessWidget {
                     const Icon(
                       BarbershopIcons.penEdit,
                       size: 16,
-                      color: ColorConstants.colorBrown,
+                      color: ColorConstants.brow,
                     ),
                     const Icon(
                       BarbershopIcons.trash,
                       size: 16,
-                      color: ColorConstants.colorRed,
+                      color: ColorConstants.red,
                     ),
                   ],
                 )

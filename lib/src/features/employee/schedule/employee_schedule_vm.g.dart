@@ -7,7 +7,7 @@ part of 'employee_schedule_vm.dart';
 // **************************************************************************
 
 String _$employeeScheduleVMHash() =>
-    r'5c0df2fa5d5b77af599af6d7939a07ee32025d75';
+    r'82d55663c41c26ca36f202f39123ec7f038751b0';
 
 /// Copied from Dart SDK
 class _SystemHash {

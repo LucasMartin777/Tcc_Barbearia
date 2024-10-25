@@ -48,10 +48,10 @@ class _EmployeeRegisterPageState extends ConsumerState<EmployeeRegisterPage> {
         case EmployeeRegisterStateStatus.initial:
           break;
         case EmployeeRegisterStateStatus.success:
-          context.showSuccess('Colaborador cadastrado com sucesso');
+          Message.showSuccess('Colaborador cadastrado com sucesso', context);
           Navigator.of(context).pop();
         case EmployeeRegisterStateStatus.error:
-          context.showError('Erro ao registrar colaborador');
+          Message.showError('Erro ao registrar colaborador', context);
       }
     });
 
@@ -180,7 +180,8 @@ class _EmployeeRegisterPageState extends ConsumerState<EmployeeRegisterPage> {
                             onPressed: () {
                               switch (formKey.currentState?.validate()) {
                                 case null || false:
-                                  context.showError('Existem campos inválidos');
+                                  Message.showError(
+                                      'Existem campos inválidos', context);
                                 case true:
                                   final EmployeeRegisterState(
                                     workdays: List(isNotEmpty: hasWorkDays),
@@ -188,8 +189,9 @@ class _EmployeeRegisterPageState extends ConsumerState<EmployeeRegisterPage> {
                                   ) = ref.watch(employeeRegisterVmProvider);
 
                                   if (!hasWorkDays || !hasWorkHours) {
-                                    context.showError(
-                                        'Por favor selecione os dias das semana e horário de atendimento');
+                                    Message.showError(
+                                        'Por favor selecione os dias das semana e horário de atendimento',
+                                        context);
                                     return;
                                   }
 

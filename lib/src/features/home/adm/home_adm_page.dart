@@ -21,7 +21,7 @@ class HomeAdmPage extends ConsumerWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         shape: const CircleBorder(),
-        backgroundColor: ColorsConstants.brow,
+        backgroundColor: ColorConstants.brow,
         onPressed: () async {
           await Navigator.of(context).pushNamed('/employee/register');
           ref.invalidate(getMeProvider);
@@ -32,7 +32,7 @@ class HomeAdmPage extends ConsumerWidget {
           maxRadius: 12,
           child: Icon(
             BarbershopIcons.addEmployee,
-            color: ColorsConstants.brow,
+            color: ColorConstants.brow,
           ),
         ),
       ),

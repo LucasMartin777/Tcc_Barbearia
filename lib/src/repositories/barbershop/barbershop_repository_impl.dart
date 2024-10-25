@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/nil.dart';
 import 'package:dio/dio.dart';
 
-import 'package:barbearia_tcc/src/core/exceptions/repository_execption.dart';
+import 'package:barbearia_tcc/src/core/exceptions/repository_exception.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
 import 'package:barbearia_tcc/src/core/restClient/rest_client.dart';
 import 'package:barbearia_tcc/src/model/barbershop_model.dart';

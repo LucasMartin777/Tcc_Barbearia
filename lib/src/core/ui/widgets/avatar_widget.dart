@@ -3,6 +3,7 @@ import 'package:barbearia_tcc/src/core/ui/constants.dart';
 import 'package:flutter/material.dart';
 
 class AvatarWidget extends StatelessWidget {
+
   final bool hideUploadButton;
 
   const AvatarWidget({super.key}) : hideUploadButton = false;
@@ -32,11 +33,12 @@ class AvatarWidget extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border.all(color: ColorsConstants.brow, width: 4),
+                    border:
+                        Border.all(color: ColorConstants.brow, width: 4),
                     shape: BoxShape.circle),
                 child: const Icon(
                   BarbershopIcons.addEmployee,
-                  color: ColorsConstants.brow,
+                  color: ColorConstants.brow,
                   size: 20,
                 ),
               ),

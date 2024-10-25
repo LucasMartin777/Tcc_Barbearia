@@ -72,9 +72,9 @@ class _ScheduleCalendarState extends State<ScheduleCalendar> {
               },
               calendarStyle: CalendarStyle(
                   selectedDecoration: const BoxDecoration(
-                      color: ColorsConstants.brow, shape: BoxShape.circle),
+                      color: ColorConstants.brow, shape: BoxShape.circle),
                   todayDecoration: BoxDecoration(
-                      color: ColorsConstants.brow.withOpacity(0.4),
+                      color: ColorConstants.brow.withOpacity(0.4),
                       shape: BoxShape.circle))),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -86,14 +86,14 @@ class _ScheduleCalendarState extends State<ScheduleCalendar> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: ColorsConstants.brow,
+                    color: ColorConstants.brow,
                   ),
                 ),
               ),
               TextButton(
                 onPressed: () {
                   if (selectedDay == null) {
-                    Messages.showError('Por favor selecione um dia', context);
+                    Message.showError('Por favor selecione um dia',context);
                     return;
                   }
                   widget.onPressed(selectedDay!);
@@ -103,7 +103,7 @@ class _ScheduleCalendarState extends State<ScheduleCalendar> {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
-                    color: ColorsConstants.brow,
+                    color: ColorConstants.brow,
                   ),
                 ),
               ),

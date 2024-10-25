@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:barbearia_tcc/src/core/exceptions/auth_exception.dart';
-import 'package:barbearia_tcc/src/core/exceptions/repository_execption.dart';
+import 'package:barbearia_tcc/src/core/exceptions/repository_exception.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/nil.dart';
 import 'package:barbearia_tcc/src/core/restClient/rest_client.dart';
@@ -18,7 +18,7 @@ class UserRepositoryImpl implements UserRepository {
       : _restClient = restClient;
 
   @override
-  Future<Either<AuthException, String>> login(
+  Future<Either<AuthExecption, String>> login(
       String email, String password) async {
     try {
       final Response(:data) = await _restClient.unAuth.post(

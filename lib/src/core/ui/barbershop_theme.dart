@@ -6,13 +6,13 @@ sealed class BarbershopTheme {
     borderRadius: BorderRadius.all(
       Radius.circular(8),
     ),
-    borderSide: BorderSide(color: ColorsConstants.grey),
+    borderSide: BorderSide(color: ColorConstants.grey),
   );
   static ThemeData themeData = ThemeData(
       useMaterial3: true,
       appBarTheme: const AppBarTheme(
           centerTitle: true,
-          iconTheme: IconThemeData(color: ColorsConstants.brow),
+          iconTheme: IconThemeData(color: ColorConstants.brow),
           backgroundColor: Colors.white,
           titleTextStyle: TextStyle(
               fontWeight: FontWeight.w500,
@@ -22,18 +22,18 @@ sealed class BarbershopTheme {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: Colors.white,
-        labelStyle: const TextStyle(color: ColorsConstants.grey),
+        labelStyle: const TextStyle(color: ColorConstants.grey),
         border: _defaultInputBorder,
         enabledBorder: _defaultInputBorder,
         focusedBorder: _defaultInputBorder,
         errorBorder: _defaultInputBorder.copyWith(
-          borderSide: const BorderSide(color: ColorsConstants.red),
+          borderSide: const BorderSide(color: ColorConstants.red),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           foregroundColor: Colors.white,
-          backgroundColor: ColorsConstants.brow,
+          backgroundColor: ColorConstants.brow,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
@@ -42,10 +42,10 @@ sealed class BarbershopTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           side: const BorderSide(
-            color: ColorsConstants.brow,
+            color: ColorConstants.brow,
             width: 1
           ),
-          foregroundColor: ColorsConstants.brow,
+          foregroundColor: ColorConstants.brow,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),

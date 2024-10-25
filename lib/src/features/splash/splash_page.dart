@@ -32,7 +32,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
     super.initState();
   }
 
-  
+  //void _redirect(String routeName) {}
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
       state.whenOrNull(
         error: (error, stackTrace) {
           log('Erro ao Validar', error: error, stackTrace: stackTrace);
-          Messages.showError('Erro ao Validar o login',context);
+          Message.showError('Erro ao Validar o login', context);
           Navigator.of(context)
               .pushNamedAndRemoveUntil('/auth/login', (route) => false);
         },

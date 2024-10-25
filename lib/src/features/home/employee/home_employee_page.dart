@@ -54,7 +54,7 @@ class HomeEmployeePage extends ConsumerWidget {
                         width: MediaQuery.of(context).size.width * .7,
                         height: 108,
                         decoration: BoxDecoration(
-                          border: Border.all(color: ColorsConstants.grey),
+                          border: Border.all(color: ColorConstants.grey),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Column(
@@ -79,7 +79,7 @@ class HomeEmployeePage extends ConsumerWidget {
                                       '$totalScheduule',
                                       style: const TextStyle(
                                         fontSize: 40,
-                                        color: ColorsConstants.brow,
+                                        color: ColorConstants.brow,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     );
@@ -91,7 +91,7 @@ class HomeEmployeePage extends ConsumerWidget {
                               'Hoje',
                               style: TextStyle(
                                 fontSize: 16,
-                                color: ColorsConstants.brow,
+                                color: ColorConstants.brow,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),

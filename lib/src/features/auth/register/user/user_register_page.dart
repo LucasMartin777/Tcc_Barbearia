@@ -37,7 +37,7 @@ class _UserRegisterPageState extends ConsumerState<UserRegisterPage> {
         case UserRegisterStateStatus.success:
           Navigator.of(context).pushNamed('/auth/register/barebershop');
         case UserRegisterStateStatus.error:
-          context.showError('Error ao registrar usuário adminstrador');
+          Message.showError('Error ao registrar usuário adminstrador', context);
       }
     });
 
@@ -105,7 +105,7 @@ class _UserRegisterPageState extends ConsumerState<UserRegisterPage> {
                 onPressed: () {
                   switch (formKey.currentState?.validate()) {
                     case null || false:
-                      context.showError('Formulário invalido');
+                      Message.showError('Formulário invalido', context);
                     case true:
                       userRegisterVM.register(
                           name: nameEC.text,

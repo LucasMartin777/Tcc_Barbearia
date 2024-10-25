@@ -21,7 +21,7 @@ class AppointmentDataSource extends CalendarDataSource {
         final endTime = DateTime(year, month, day, hour + 1, 0, 0);
 
         return Appointment(
-          color: ColorsConstants.brow,
+          color: ColorConstants.brow,
           startTime: startTime,
           endTime: endTime,
           subject: clientName,

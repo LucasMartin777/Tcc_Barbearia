@@ -20,7 +20,7 @@ class SplashVm extends _$SplashVm {
   Future<SplashState> build() async {
     final sp = await SharedPreferences.getInstance();
 
-    if (sp.containsKey(LocalStorageKeys.accessToken)) {
+    if (sp.containsKey(LocalStorageKey.accessToken)) {
       ref.invalidate(getMeProvider);
       ref.invalidate(getMyBarbershopProvider);
 

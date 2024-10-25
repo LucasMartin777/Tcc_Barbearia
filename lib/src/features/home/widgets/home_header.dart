@@ -63,7 +63,7 @@ class HomeHeader extends ConsumerWidget {
                     child: Text(
                       'Editar',
                       style: TextStyle(
-                          color: ColorsConstants.brow,
+                          color: ColorConstants.brow,
                           fontSize: 12,
                           fontWeight: FontWeight.w500),
                     ),
@@ -74,7 +74,7 @@ class HomeHeader extends ConsumerWidget {
                     },
                     icon: const Icon(
                       BarbershopIcons.exit,
-                      color: ColorsConstants.brow,
+                      color: ColorConstants.brow,
                       size: 32,
                     ),
                   ),
@@ -124,7 +124,7 @@ class HomeHeader extends ConsumerWidget {
                   padding: EdgeInsets.only(right: 24.0),
                   child: Icon(
                     BarbershopIcons.search,
-                    color: ColorsConstants.brow,
+                    color: ColorConstants.brow,
                     size: 26,
                   ),
                 ),

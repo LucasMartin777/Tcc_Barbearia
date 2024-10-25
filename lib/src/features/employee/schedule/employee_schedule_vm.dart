@@ -1,4 +1,4 @@
-import 'package:barbearia_tcc/src/core/exceptions/repository_execption.dart';
+import 'package:barbearia_tcc/src/core/exceptions/repository_exception.dart';
 import 'package:barbearia_tcc/src/core/fp_funcional_program/eitheri.dart';
 import 'package:barbearia_tcc/src/core/providers/application_providers.dart';
 import 'package:barbearia_tcc/src/model/schedule_model.dart';
@@ -24,7 +24,7 @@ class EmployeeScheduleVM extends _$EmployeeScheduleVM {
           AsyncError(Exception(exception), StackTrace.current),
       };
 
-  Future<Either<RepositoryExecption, List<ScheduleModel>>> _getSchedules(
+  Future<Either<RepositoryException, List<ScheduleModel>>> _getSchedules(
     int userId,
     DateTime date,
   ) =>
